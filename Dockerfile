@@ -15,15 +15,8 @@ RUN echo "postfix postfix/mailname string example.com" | debconf-set-selections 
         && apt-get install -y postfix
 
 # deploy app
-RUN curl -L -o /tmp/restyaboard.zip https://github.com/javier-diezmart/board/archive/master.zip \
-        && unzip /tmp/restyaboard.zip -d /usr/share/nginx/html \
-        && rm /tmp/restyaboard.zip
-RUN curl -L -o /tmp/apps.zip https://github.com/javier-diezmart/board-apps/archive/master.zip \
-        && unzip /tmp/apps.zip -d /usr/share/nginx/html/client \
-        && rm /tmp/apps.zip \
-        && mkdir /usr/share/nginx/html/client/apps
-RUN cp -R /usr/share/nginx/html/client/board-apps-master/* /usr/share/nginx/html/client/apps \
-		&& rm -R /usr/share/nginx/html/client/board-apps-master
+ADD board /usr/share/nginx/html 
+ADD apps /usr/share/nginx/html/client/apps 
 
 
 # setting app
@@ -33,6 +26,7 @@ RUN cp -R media /tmp/ \
         && sed -i 's/^.*listen.mode = 0660$/listen.mode = 0660/' /etc/php5/fpm/pool.d/www.conf \
         && sed -i 's|^.*fastcgi_pass.*$|fastcgi_pass unix:/var/run/php5-fpm.sock;|' /etc/nginx/conf.d/restyaboard.conf \
         && sed -i -e "/fastcgi_pass/a fastcgi_param HTTPS 'off';" /etc/nginx/conf.d/restyaboard.conf
+RUN chmod 777 -R /usr/share/nginx/html
 
 
 
