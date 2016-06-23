@@ -16,7 +16,7 @@ RUN echo "postfix postfix/mailname string example.com" | debconf-set-selections 
 
 # deploy app
 ADD board /usr/share/nginx/html 
-ADD apps /usr/share/nginx/html/client/apps 
+ADD board-apps /usr/share/nginx/html/client/apps 
 
 
 # setting app

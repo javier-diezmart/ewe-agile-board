@@ -1,0 +1,6 @@
+[submodule "board-apps"]
+	path = board-apps
+	url = https://github.com/javier-diezmart/board-apps.git
+[submodule "board"]
+	path = board
+	url = https://github.com/javier-diezmart/board.git
