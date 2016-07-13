@@ -17,6 +17,15 @@ RUN echo "postfix postfix/mailname string example.com" | debconf-set-selections 
 # deploy app
 ADD board /usr/share/nginx/html 
 ADD board-apps /usr/share/nginx/html/client/apps 
+#RUN curl -L -o /tmp/restyaboard.zip https://github.com/javier-diezmart/board/archive/master.zip \
+#         && unzip /tmp/restyaboard.zip -d /usr/share/nginx/html \
+#         && rm /tmp/restyaboard.zip
+#RUN curl -L -o /tmp/apps.zip https://github.com/javier-diezmart/board-apps/archive/master.zip \
+#         && unzip /tmp/apps.zip -d /usr/share/nginx/html/client \
+#         && rm /tmp/apps.zip \
+#         && mkdir /usr/share/nginx/html/client/apps
+#RUN cp -R /usr/share/nginx/html/client/board-apps-master/* /usr/share/nginx/html/client/apps \
+# 		&& rm -R /usr/share/nginx/html/client/board-apps-master
 
 
 # setting app
